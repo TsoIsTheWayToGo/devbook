@@ -13,17 +13,16 @@ router.get('/test', (req, res) => res.json({msg: "Users Works"}));// will automa
 //@route GET api/users/register
 //@desc Register users 
 //@access Public
-router.post('./register', (req,res) => {
-  User.findOne({email: req.body.email}) //must require body parser in server.js
-  .then(user => {
+router.post('/register', (req,res) => {
+  User.findOne({email: req.body.email}).then(user => {
     if(user){
       return res.status(400).json({email: 'Email already exist'})
-    }else {
+    } else {
       const avatar = gravatar.url(req.body.email, {
         s: '200', //size
         r: 'pg', //rating
         d: 'mm' //Default
-      })
+      });
 
       const newUser = new User({
         name: req.body.name, //.body is a body-parser method
@@ -31,7 +30,7 @@ router.post('./register', (req,res) => {
         avatar,//: avatar,es6 magic // will come from gravatar
         password: req.body.password
       });
-      bcrypt.genSalt(10, (err,salt)=>{
+      bcrypt.genSalt(10, (err, salt)=> {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if(err) throw err;
           newUser.password = hash;
