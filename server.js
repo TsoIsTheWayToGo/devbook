@@ -3,6 +3,26 @@ const express = require('express');
  
  const app = express();
  // routes
+ const users = require('./routes/api/users');
+ const profile = require('./routes/api/profile');
+ const posts = require('./routes/api/posts');
+ 
+ 
+
+//DB config
+const db = require('./config/keys').mongoURI;
+
+//connect to mogodb
+mongoose.connect(db)
+.then(()=> console.log('MongoDB Connected'))
+.catch(err => console.log(err));
+
+ app.get('/', (req,res) => res.send('Hello!'));
+
+ //use routes
+ app.use('/api/users', users);
+ app.use('/api/proile', profile);
+ app.use('/api/posts', posts);
 
  const port = process.env.PORT || 5000;
 
