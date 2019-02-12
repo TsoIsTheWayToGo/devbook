@@ -7,7 +7,8 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 
 //load input validations
-const validateRegisterInput = require('../../validation/register')
+const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 //load User moder
 const User = require('../../models/User')
