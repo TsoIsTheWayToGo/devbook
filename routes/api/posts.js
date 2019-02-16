@@ -16,7 +16,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Posts Works' }));
 
 
 
-// @route   POST api/posts/test
+// @route   POST api/posts
 // @desc    Create Post
 // @access  private
 
@@ -37,6 +37,17 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req,res) => {
   newPost.save().then(post => res.json(post));
 }
 );
+
+// @route   Get api/posts
+// @desc    Get Post
+// @access  private
+router.get('/', (req,res) => {
+  Post.find()
+  .sort({date: -1})
+  .then(posts => res.json(posts))
+  .catch(err => res.status(404))
+})
+
 
 
 module.exports = router;
