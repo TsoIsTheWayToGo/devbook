@@ -179,7 +179,13 @@ router.post('/comment/:id/:comment_id', passport.authenticate('jwt', { session: 
       }
 
       //REMOVE comment index
-      
+      const removeIndex = post.comments
+      .map(item => item._id.toString())
+      .indexOf(req.params.comment_id);
+
+      //splioce out of array
+      post.comment.splice(removeIndex, 1)
+      post.save().then(post => res.json(post)) 
     })
     .catch(err => res.status(404).json({ postnotfound: "Comment not found" }));
 })
