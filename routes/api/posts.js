@@ -142,8 +142,15 @@ router.post('/unlike/:id', passport.authenticate('jwt', { session: false }), (re
 // @access  private
 
 router.post('/comment/:id', passport.authenticate('jwt',{session : false}), (req,res) => {
+  const { errors, isValid } = validatePostInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  
   Post.findById(req.params.id)
   .then(post => {
+    
     const newComment = {
       text: req.body.text,
       name: req.body.name,
