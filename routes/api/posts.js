@@ -170,7 +170,7 @@ router.post('/comment/:id', passport.authenticate('jwt',{session : false}), (req
 // @desc     Delete comment to a post
 // @access  private
 
-router.post('/comment/:id/:comment_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session: false }), (req, res) => {
   
   Post.findById(req.params.id)
     .then(post => {
@@ -184,10 +184,10 @@ router.post('/comment/:id/:comment_id', passport.authenticate('jwt', { session: 
       .indexOf(req.params.comment_id);
 
       //splioce out of array
-      post.comment.splice(removeIndex, 1)
+      post.comments.splice(removeIndex, 1)
       post.save().then(post => res.json(post)) 
     })
-    .catch(err => res.status(404).json({ postnotfound: "Comment not found" }));
+    .catch(err => res.status(404).json({ commentnotexist: "Comment not found" }));
 })
 
 
