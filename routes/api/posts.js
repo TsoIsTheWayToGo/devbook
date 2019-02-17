@@ -147,7 +147,7 @@ router.post('/comment/:id', passport.authenticate('jwt',{session : false}), (req
   if (!isValid) {
     return res.status(400).json(errors);
   }
-  
+
   Post.findById(req.params.id)
   .then(post => {
     
@@ -165,5 +165,26 @@ router.post('/comment/:id', passport.authenticate('jwt',{session : false}), (req
   })
   .catch(err => res.status(404).json({ postnotfound: "post not found"}));
 })
+
+// @route   Delete api/posts/comment/:id/:comment_id
+// @desc     Delete comment to a post
+// @access  private
+
+router.post('/comment/:id/:comment_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  
+  Post.findById(req.params.id)
+    .then(post => {
+      if(post.comments.filter(comment => comment._id.toString() === req.params.comment_id).length === 0) {
+        return res.status(404).json({ commentnotexist: 'Comment does not exist'})
+      }
+
+      //REMOVE comment index
+      
+    })
+    .catch(err => res.status(404).json({ postnotfound: "Comment not found" }));
+})
+
+
+
 
 module.exports = router;
