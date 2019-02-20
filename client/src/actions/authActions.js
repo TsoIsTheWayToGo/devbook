@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { GET_ERRORS } from './types'
+import { GET_ERRORS } from './types';
+import setAuthToken from '../utils/setAuthToken';
 // Register User
 
 export const registerUser = (userData, history) => dispatch => {
