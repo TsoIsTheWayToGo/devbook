@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import classnames from 'classnames'; 
 import { loginUser } from '../../actions/authActions';
-import TextFieldGroup from '../common/TextFieldGroup'
+import TextFieldGroup from '../common/TextFieldGroup';
+
 class Login extends Component {
   constructor() {
     super();
@@ -18,18 +18,18 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    if(this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard')
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.auth.isAuthenticated){
-      this.props.history.push('/dashboard')
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
     }
-    
-    if(nextProps.errors) {
-      this.setState({errors: nextProps.errors})
+
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
 
@@ -51,7 +51,6 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
 
-
     return (
       <div className="login">
         <div className="container">
@@ -63,12 +62,12 @@ class Login extends Component {
               </p>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                placeholder="Email Address"
-                name="email"
-                type="email"
-                value={this.state.email}
-                onChange={this.onChange}
-                error={errors.email}
+                  placeholder="Email Address"
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  error={errors.email}
                 />
 
                 <TextFieldGroup
@@ -79,7 +78,6 @@ class Login extends Component {
                   onChange={this.onChange}
                   error={errors.password}
                 />
-
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
@@ -90,14 +88,15 @@ class Login extends Component {
   }
 }
 
-Login.propTypees = {
+Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-}
-const mapStateToProps = (state) => ({
-  auth: state.auth, 
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
   errors: state.errors
-})
+});
 
 export default connect(mapStateToProps, { loginUser })(Login);
