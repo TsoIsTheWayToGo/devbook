@@ -32,15 +32,16 @@ class ProfileGithub extends Component {
 
   render() {
     const { repos } = this.state;
-
+    
     const repoItems = repos.map(repo => (
+      
       <div key={repo.id} className="card card-body mb-2">
         <div className="row">
           <div className="col-md-6">
             <h4>
-              <Link to={repo.html_url} className="text-info" target="_blank">
+              <a href={repo.html_url} className="text-info" target="_blank">
                 {repo.name}
-              </Link>
+              </a>
             </h4>
             <p>{repo.description}</p>
           </div>

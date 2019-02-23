@@ -27,9 +27,8 @@ export const getCurrentProfile = () => dispatch => {
       })
     );
 };
-
 // Get profile by handle
-export const getProfileByHandle = handle => dispatch => {
+export const getProfileByHandle = (handle) => dispatch => {
   dispatch(setProfileLoading());
   axios
     .get(`/api/profile/handle/${handle}`)
@@ -122,7 +121,7 @@ export const deleteEducation = id => dispatch => {
     );
 };
 
-// Get all profiles
+//get all profiles
 export const getProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios

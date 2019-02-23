@@ -12,6 +12,7 @@ class Posts extends Component {
   }
 
   render() {
+
     const { posts, loading } = this.props.post;
     let postContent;
 
@@ -20,6 +21,7 @@ class Posts extends Component {
     } else {
       postContent = <PostFeed posts={posts} />;
     }
+
 
     return (
       <div className="feed">
@@ -32,7 +34,7 @@ class Posts extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
