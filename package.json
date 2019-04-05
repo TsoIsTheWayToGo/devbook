@@ -1,5 +1,5 @@
 {
-  "name": "devconnector",
+  "name": "BayConnector",
   "version": "1.0.0",
   "description": "my social network for developers",
   "main": "server.js",
@@ -26,6 +26,7 @@
     "passport-jwt": "^4.0.0",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "validator": "^10.11.0"
   },
